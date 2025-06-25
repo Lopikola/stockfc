@@ -12,7 +12,7 @@ const companyInfo: Record<string, { name: string; logo: string }> = {
   TSLA: { name: 'Tesla Inc.', logo: 'https://logo.clearbit.com/tesla.com' }
 };
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   try {
     const quotes = await Promise.all(
       symbols.map(async (symbol) => {

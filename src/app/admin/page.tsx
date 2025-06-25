@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import type { NewsFormData, NewsItem } from '@/lib/types'
 
-export default function AdminPage() {
-  const [newsItems, setNewsItems] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [form, setForm] = useState({
+export default function AdminPage(): JSX.Element {
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [form, setForm] = useState<NewsFormData>({
     headline: '',
     ticker: '',
     sentiment: '',
@@ -17,7 +18,7 @@ export default function AdminPage() {
     fetchNews()
   }, [])
 
-  async function fetchNews() {
+  async function fetchNews(): Promise<void> {
     setLoading(true)
     const { data, error } = await supabase
       .from('news_items')
@@ -33,7 +34,9 @@ export default function AdminPage() {
     setLoading(false)
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault()
     const { error } = await supabase.from('news_items').insert([
       {
@@ -52,7 +55,7 @@ export default function AdminPage() {
     }
   }
 
-  async function handleDelete(id: string) {
+  async function handleDelete(id: string): Promise<void> {
     const { error } = await supabase.from('news_items').delete().eq('id', id)
     if (error) {
       console.error('Delete error:', error)

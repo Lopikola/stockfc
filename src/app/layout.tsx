@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Live stock headlines and AI signals',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <html lang="en">
       <body>

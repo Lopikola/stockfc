@@ -4,19 +4,21 @@ import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
-export default function SignupPage() {
+export default function SignupPage(): JSX.Element {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [message, setMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const { data, error } = await supabase.auth.signUp({

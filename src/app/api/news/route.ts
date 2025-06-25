@@ -8,7 +8,7 @@ const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   try {
     if (!NEWS_API_KEY) {
       throw new Error('Missing NEWS_API_KEY in environment variables');

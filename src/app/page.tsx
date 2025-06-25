@@ -3,29 +3,19 @@
 import { useEffect, useState } from 'react';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import type { NewsItem } from '@/lib/types';
 
-interface NewsItem {
-  id: string;
-  published_at: string;
-  headline: string;
-  ticker: string;
-  sentiment: string;
-  signal: string;
-}
-
-export default function Home() {
+export default function Home(): JSX.Element {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     const handleMagicLinkAndFetch = async () => {
       const supabase = createPagesBrowserClient();
       await supabase.auth.getSession();
-      const { data: { session } } = await supabase.auth.getSession();
 
       const { data, error } = await supabase
         .from('news_items')
