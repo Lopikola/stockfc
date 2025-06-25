@@ -1,7 +1,7 @@
 // src/app/api/test/route.ts
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   const apiKey = process.env.FINNHUB_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: 'Missing FINNHUB_API_KEY' }, { status: 500 });

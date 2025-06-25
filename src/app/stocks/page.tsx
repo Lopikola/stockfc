@@ -13,14 +13,14 @@ type StockQuote = {
   history: number[];
 };
 
-export default function StocksPage() {
+export default function StocksPage(): JSX.Element {
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [stocks, setStocks] = useState<StockQuote[] | null>(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       setLoading(true);
       setError(null);
       try {

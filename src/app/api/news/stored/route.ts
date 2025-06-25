@@ -7,7 +7,7 @@ const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   try {
     const { data, error } = await supabase
       .from('news_items')

@@ -15,13 +15,13 @@ type NewsItem = {
   signal?: 'buy' | 'sell' | 'hold';
 };
 
-export default function NewsPage() {
+export default function NewsPage(): JSX.Element {
   const [news, setNews] = useState<NewsItem[]>([]);
-  const [search, setSearch] = useState('');
-  const [sentimentFilter, setSentimentFilter] = useState('');
+  const [search, setSearch] = useState<string>('');
+  const [sentimentFilter, setSentimentFilter] = useState<string>('');
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchNews = async (): Promise<void> => {
       try {
         const res = await fetch('/api/news/stored');
         const data = await res.json();
